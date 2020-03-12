@@ -1,7 +1,7 @@
 const http = require("http");
 
 http.createServer(function (request, response) {
-    let url = new URL(request.url, request.headers.host);
+    let url = new URL(request.url, `http://${request.headers.host}`);
     let path = url.pathname;
     let params = url.searchParams;
       
