@@ -17,7 +17,7 @@ fi
 tar -vxf ${NODE_PACKAGE}
 mv node-${NODE_VERSION}-linux-x64/ node/
 
-export PATH=$PATH/app/node
+export PATH=$PATH/app/node/bin
 
 
 if [ ! -d build ]; then
@@ -77,5 +77,5 @@ systemctl enable openresty
 systemctl start openresty
 
 # start node app
-/app/node/node /app/backend/app.js
+/app/node/node/bin /app/backend/app.js
 
