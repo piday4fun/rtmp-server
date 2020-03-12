@@ -68,8 +68,11 @@ cd ..
 cp ./config/nginx.conf /opt/openresty/nginx/conf/nginx.conf
 cp ./config/openresty.service //usr/lib/systemd/system/
 
-# start 
+# start openresty
 systemctl enable openresty
 systemctl start openresty
+
+# start node app
+/app/node/node /app/backend/app.js
 
 cd ..
