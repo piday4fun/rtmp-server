@@ -58,6 +58,7 @@ cd openresty-${OPENRESTY_VERSION}
     --with-http_stub_status_module\
     --with-http_gzip_static_module\
     --with-http_flv_module\
+    --with-http_mp4_module\
     --with-http_perl_module\
     --with-mail
 
