@@ -69,8 +69,8 @@ cd ..
 cd ..
 
 # copy config files
-cp ./config/nginx.conf /opt/openresty/nginx/conf/nginx.conf
-cp ./config/openresty.service //usr/lib/systemd/system/
+cp ./conf/nginx.conf /opt/openresty/nginx/conf/nginx.conf
+cp ./conf/openresty.service //usr/lib/systemd/system/
 
 # start openresty
 systemctl enable openresty
