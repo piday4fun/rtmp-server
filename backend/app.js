@@ -1,14 +1,14 @@
 const http = require("http");
 
 http.createServer(function (request, response) {
-    let url = new URL(request.url);
+    let url = new URL(request.url, request.headers.host);
     let path = url.pathname;
     let params = url.searchParams;
       
     console.log(path, JSON.stringify(params));
 
     switch(path) {
-        
+
     }
 
 
