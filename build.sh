@@ -47,8 +47,10 @@ tar -xvf 2.3.tar.gz  -C openresty-1.15.8.2/bundle
 cd openresty-1.15.8.2
 
 ./configure --prefix=/opt/openresty \ 
-    --with-luajit --with-http_ssl_module \
-    --user=root --group=root \
+    --with-luajit \
+    --with-http_ssl_module \
+    --user=root \
+    --group=root \
     --with-http_realip_module \
     --add-module=./bundle/ngx_cache_purge-2.3 \
     --add-module=./bundle/nginx-rtmp-module-1.2.1 \
