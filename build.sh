@@ -15,7 +15,7 @@ if [ ! -f ${NODE_PACKAGE} ]; then
 fi
 
 tar -vxf ${NODE_PACKAGE}
-mv node-${NODE_VERSION}/ node/
+mv node-${NODE_VERSION}-linux-x64/ node/
 
 export PATH=$PATH/app/node
 
