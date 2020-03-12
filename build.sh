@@ -40,25 +40,25 @@ if [ ! -f v1.2.1.tar.gz ]; then
 fi
 
 tar -xvf ${OPENRESTY_PACKAGE}
-tar -xvf v1.2.1.tar.gz -C openresty-1.15.8.2/bundle
-tar -xvf 2.3.tar.gz  -C openresty-1.15.8.2/bundle
+tar -xvf v1.2.1.tar.gz -C openresty-${OPENRESTY_VERSION}/bundle
+tar -xvf 2.3.tar.gz  -C openresty-${OPENRESTY_VERSION}/bundle
 
 # build openresty
-cd openresty-1.15.8.2
+cd openresty-${OPENRESTY_VERSION}
 
-./configure --prefix=/opt/openresty \ 
-    --with-luajit \
-    --with-http_ssl_module \
-    --user=root \
-    --group=root \
-    --with-http_realip_module \
-    --add-module=./bundle/ngx_cache_purge-2.3 \
-    --add-module=./bundle/nginx-rtmp-module-1.2.1 \
-    --with-http_xslt_module \
-    --with-http_stub_status_module \
-    --with-http_gzip_static_module \
-    --with-http_flv_module \
-    --with-http_perl_module \
+./configure --prefix=/opt/openresty\
+    --with-luajit\
+    --with-http_ssl_module\
+    --user=root\
+    --group=root\
+    --with-http_realip_module\
+    --add-module=./bundle/ngx_cache_purge-2.3\
+    --add-module=./bundle/nginx-rtmp-module-1.2.1\
+    --with-http_xslt_module\
+    --with-http_stub_status_module\
+    --with-http_gzip_static_module\
+    --with-http_flv_module\
+    --with-http_perl_module\
     --with-mail
 
 make
