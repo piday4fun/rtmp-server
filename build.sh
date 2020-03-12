@@ -15,6 +15,9 @@ if [ ! -f ${NODE_PACKAGE} ]; then
 fi
 
 tar -vxf ${NODE_PACKAGE}
+mv node-${NODE_VERSION}/ node/
+
+export PATH=$PATH/app/node
 
 
 if [ ! -d build ]; then
@@ -43,7 +46,18 @@ tar -xvf 2.3.tar.gz  -C openresty-1.15.8.2/bundle
 # build openresty
 cd openresty-1.15.8.2
 
-./configure --prefix=/opt/openresty --with-luajit --with-http_ssl_module --user=root --group=root --with-http_realip_module --add-module=./bundle/ngx_cache_purge-2.3/ --add-module=./bundle/nginx-rtmp-module-1.2.1 --with-http_xslt_module --with-http_stub_status_module --with-http_gzip_static_module --with-http_flv_module --with-http_perl_module --with-mail
+./configure --prefix=/opt/openresty \ 
+    --with-luajit --with-http_ssl_module \
+    --user=root --group=root \
+    --with-http_realip_module \
+    --add-module=./bundle/ngx_cache_purge-2.3 \
+    --add-module=./bundle/nginx-rtmp-module-1.2.1 \
+    --with-http_xslt_module \
+    --with-http_stub_status_module \
+    --with-http_gzip_static_module \
+    --with-http_flv_module \
+    --with-http_perl_module \
+    --with-mail
 
 make
 make install
@@ -51,7 +65,11 @@ make install
 cd ..
 
 # copy config files
-copy ./config/nginx.conf /opt/openresty/nginx/conf/nginx.conf
+cp ./config/nginx.conf /opt/openresty/nginx/conf/nginx.conf
+cp ./config/openresty.service //usr/lib/systemd/system/
 
+# start 
+systemctl enable openresty
+systemctl start openresty
 
 cd ..
