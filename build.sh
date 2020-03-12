@@ -12,7 +12,7 @@ yum -y install wget gcc pcre pcre-devel openssl openssl-devel libxml2-devel libx
 # install node.js
 if [ ! -f ${NODE_PACKAGE} ]; then
     wget https://nodejs.org/dist/${NODE_VERSION}/${NODE_PACKAGE}
-if
+fi
 
 tar -vxf ${NODE_PACKAGE}
 
