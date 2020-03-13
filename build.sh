@@ -12,14 +12,14 @@ yum -y update
 yum -y install wget gcc pcre pcre-devel openssl openssl-devel libxml2-devel libxslt-devel
 
 # install node.js
-if [ ! -f ${NODE_PACKAGE} ]; then
-    wget https://nodejs.org/dist/${NODE_VERSION}/${NODE_PACKAGE}
-fi
+#if [ ! -f ${NODE_PACKAGE} ]; then
+#    wget https://nodejs.org/dist/${NODE_VERSION}/${NODE_PACKAGE}
+#fi
 
-tar -vxf ${NODE_PACKAGE}
-mv ${NODE}/ node/
+#tar -vxf ${NODE_PACKAGE}
+#mv ${NODE}/ node/
 
-export PATH=$PATH/app/node/bin
+#export PATH=$PATH/app/node/bin
 
 
 if [ ! -d build ]; then
@@ -62,5 +62,5 @@ cp ./conf/nginx.conf /usr/local/nginx/conf/nginx.conf
 
 
 # start node app
-/app/node/bin/node /app/backend/app.js
+#/app/node/bin/node /app/backend/app.js
 
