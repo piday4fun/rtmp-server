@@ -34,11 +34,12 @@ if [ ! -f ${NGINX_PACKAGE} ]; then
 fi
 
 
-if [ ! -d nginx-rtmp-module ]; then
-    git clone https://github.com/arut/nginx-rtmp-module.git
+if [ ! -d master.zip ]; then
+    wget https://github.com/arut/nginx-rtmp-module/archive/master.zip
 fi
 
 tar -xvf ${NGINX_PACKAGE}
+tar -xvf master.zip
 
 # build openresty
 cd ${NGINX}
