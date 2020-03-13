@@ -34,17 +34,17 @@ if [ ! -f ${NGINX_PACKAGE} ]; then
 fi
 
 
-if [ ! -d master.zip ]; then
-    wget https://github.com/arut/nginx-rtmp-module/archive/master.zip
+if [ ! -d v1.2.1.zip ]; then
+    wget https://github.com/arut/nginx-rtmp-module/archive/v1.2.1.zip
 fi
 
 tar -xvf ${NGINX_PACKAGE}
-tar -xvf master.zip
+tar -xvf v1.2.1.zip
 
 # build openresty
 cd ${NGINX}
 
-./configure --prefix=/usr/local/nginx  --add-module=../nginx-rtmp-module  --with-http_ssl_module
+./configure --prefix=/usr/local/nginx --add-module=../nginx-rtmp-module-1.2.1 --with-http_ssl_module
 
 make
 make install
