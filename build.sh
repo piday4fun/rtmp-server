@@ -3,7 +3,7 @@
 NGINX_VERSION=1.17.9
 NODE_VERSION=v12.16.1
 
-NGINX=nginx-${OPENRESTY_VERSION}
+NGINX=nginx-${NGINX_VERSION}
 NODE=node-${NODE_VERSION}-linux-x64
 NGINX_PACKAGE=${NGINX}.tar.gz
 NODE_PACKAGE=${NODE}.tar.xz
@@ -62,5 +62,5 @@ cp ./conf/nginx.conf /usr/local/nginx/conf/nginx.conf
 
 
 # start node app
-/app/node/node/bin /app/backend/app.js
+/app/node/bin/node /app/backend/app.js
 
