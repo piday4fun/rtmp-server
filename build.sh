@@ -1,9 +1,9 @@
 #!/bin/sh
 
-OPENRESTY_VERSION=1.15.8.2
+NGINX_VERSION=1.17.9
 NODE_VERSION=v12.16.1
 
-OPENRESTY_PACKAGE=openresty-${OPENRESTY_VERSION}.tar.gz
+NGINX_PACKAGE=nginx-${OPENRESTY_VERSION}.tar.gz
 NODE_PACKAGE=node-${NODE_VERSION}-linux-x64.tar.xz
 
 yum -y update
@@ -27,40 +27,22 @@ fi
 # 
 cd build
 
-if [ ! -f ${OPENRESTY_PACKAGE} ]; then
-    wget https://openresty.org/download/${OPENRESTY_PACKAGE}
+if [ ! -f ${NGINX_PACKAGE} ]; then
+    wget http://nginx.org/download/${NGINX_PACKAGE}
 fi
 
-if [ ! -f 2.3.tar.gz ]; then
-    wget https://github.com/FRiCKLE/ngx_cache_purge/archive/2.3.tar.gz
-fi
 
 if [ ! -f v1.2.1.tar.gz ]; then
     wget https://github.com/arut/nginx-rtmp-module/archive/v1.2.1.tar.gz
 fi
 
 tar -xvf ${OPENRESTY_PACKAGE}
-tar -xvf v1.2.1.tar.gz -C openresty-${OPENRESTY_VERSION}/bundle
-tar -xvf 2.3.tar.gz  -C openresty-${OPENRESTY_VERSION}/bundle
+tar -xvf v1.2.1.tar.gz
 
 # build openresty
-cd openresty-${OPENRESTY_VERSION}
+cd nginx-${NGINX_PACKAGE}
 
-./configure --prefix=/opt/openresty\
-    --with-luajit\
-    --with-http_ssl_module\
-    --user=root\
-    --group=root\
-    --with-http_realip_module\
-    --add-module=./bundle/ngx_cache_purge-2.3\
-    --add-module=./bundle/nginx-rtmp-module-1.2.1\
-    --with-http_xslt_module\
-    --with-http_stub_status_module\
-    --with-http_gzip_static_module\
-    --with-http_flv_module\
-    --with-http_mp4_module\
-    --with-http_perl_module\
-    --with-mail
+./configure --prefix=/usr/local/nginx  --add-module=../nginx-rtmp-module-1.2.1  --with-http_ssl_module
 
 make
 make install
@@ -70,12 +52,12 @@ cd ..
 cd ..
 
 # copy config files
-cp ./conf/nginx.conf /opt/openresty/nginx/conf/nginx.conf
-cp ./conf/openresty.service //usr/lib/systemd/system/
+cp ./conf/nginx.conf /usr/local/nginx/conf/nginx.conf
+
 
 # start openresty
-systemctl enable openresty
-systemctl start openresty
+/usr/local/nginx/sbin/nginx
+
 
 # start node app
 /app/node/node/bin /app/backend/app.js
