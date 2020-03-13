@@ -3,11 +3,13 @@
 NGINX_VERSION=1.17.9
 NODE_VERSION=v12.16.1
 
-NGINX_PACKAGE=nginx-${OPENRESTY_VERSION}.tar.gz
-NODE_PACKAGE=node-${NODE_VERSION}-linux-x64.tar.xz
+NGINX=nginx-${OPENRESTY_VERSION}
+NODE=node-${NODE_VERSION}-linux-x64
+NGINX_PACKAGE=${NGINX}.tar.gz
+NODE_PACKAGE=${NODE}.tar.xz
 
 yum -y update
-yum -y install wget gcc pcre pcre-devel openssl openssl-devel libxml2-devel libxslt-devel perl-ExtUtils-Embed
+yum -y install wget gcc pcre pcre-devel openssl openssl-devel libxml2-devel libxslt-devel
 
 # install node.js
 if [ ! -f ${NODE_PACKAGE} ]; then
@@ -15,7 +17,7 @@ if [ ! -f ${NODE_PACKAGE} ]; then
 fi
 
 tar -vxf ${NODE_PACKAGE}
-mv node-${NODE_VERSION}-linux-x64/ node/
+mv ${NODE}/ node/
 
 export PATH=$PATH/app/node/bin
 
@@ -36,11 +38,11 @@ if [ ! -f v1.2.1.tar.gz ]; then
     wget https://github.com/arut/nginx-rtmp-module/archive/v1.2.1.tar.gz
 fi
 
-tar -xvf ${OPENRESTY_PACKAGE}
+tar -xvf ${NGINX_PACKAGE}
 tar -xvf v1.2.1.tar.gz
 
 # build openresty
-cd nginx-${NGINX_PACKAGE}
+cd ${NGINX}
 
 ./configure --prefix=/usr/local/nginx  --add-module=../nginx-rtmp-module-1.2.1  --with-http_ssl_module
 
